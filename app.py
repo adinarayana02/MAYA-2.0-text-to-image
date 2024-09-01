@@ -4,29 +4,30 @@ import requests
 from monsterapi import client
 from io import BytesIO
 
-def imagen(prompt):
+def imagen(prompt, count):
     os.environ['MONSTER_API_KEY'] = os.getenv('MONSTERAI_API_KEY')
     monster_client = client()
 
     try:
-        with st.spinner('Generating image...'):
+        with st.spinner('Generating images...'):
             response = monster_client.get_response(
                 model='sdxl-base',
                 data={
                     'prompt': prompt,
                     'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly',
-                    'samples': 1,
+                    'samples': count,  # Number of images to generate
                     'steps': 40,
                     'aspect_ratio': 'square',
                     'guidance_scale': 8.5
+                    'system_prompt': "Generate a high-quality, detailed, and visually accurate image based on the provided text prompt. The image should faithfully represent all elements described, avoiding any unrealistic, distorted, or low-quality features. Focus on creating a visually appealing and natural-looking image that closely matches the prompt."
                 }
             )
             imageList = monster_client.wait_and_get_result(response['process_id'], timeout=200)
-            st.success("Image generated successfully!")
-            return imageList['output'][0]  # Returning the first image URL
+            st.success(f"Successfully generated {count} image(s)!")
+            return imageList['output']  # Return the list of image URLs
     except Exception as e:
         st.error(f"An error occurred: {e}")
-        return None
+        return []
 
 def fetch_image(image_url):
     """Fetch the image from the URL and return as a BytesIO object."""
@@ -215,7 +216,6 @@ st.markdown("""
 st.markdown('''
     <div class="header">
         <div class="title">LUNA AI</div>
-        </div>
     </div>
 ''', unsafe_allow_html=True)
 
@@ -228,40 +228,29 @@ st.caption("This is an AI Image Generator. It creates an image from scratch from
 with st.container():
     st.subheader("Input Prompt")
     with st.form("prompt_form", clear_on_submit=False):
-        prompt = st.text_area("Enter your prompt here", height=100)  # Reduced height
-        submit_button = st.form_submit_button(label="Generate")
+        prompt = st.text_area("Enter your prompt here", height=100)
+        count = st.slider("Select the number of images to generate", min_value=1, max_value=10, value=1)  # Add a slider for image count
+        submit = st.form_submit_button("Generate Image")
 
-    if submit_button:
-        image_url = imagen(prompt)
-        if image_url:
-            st.subheader("Generated Image")
-            st.image(image_url, use_column_width=True)
-            
-            # Add download button
-            image_bytes = fetch_image(image_url)
-            st.download_button(
-                label="Download Image",
-                data=image_bytes,
-                file_name="generated_image.png",
-                mime="image/png"
-            )
-        else:
-            st.error("Failed to generate image.")
-
-    # Additional content below the generate button
-    st.markdown("""
-        <div class="additional-content">
-            <h3>Creativity at the Speed of Your Imagination</h3>
-            <p>Create beautiful variations instantly.</p>
-        </div>
-    """, unsafe_allow_html=True)
+        if submit:
+            if not prompt:
+                st.warning("Please enter a prompt before submitting.")
+            else:
+                imageList = imagen(prompt, count)  # Use the updated image generation function
+                if imageList:
+                    st.success(f"Generated {len(imageList)} image(s) successfully!")
+                    for i, image_url in enumerate(imageList):
+                        st.image(image_url, caption=f"Generated Image {i+1}", use_column_width=True)
+                        st.download_button(
+                            label=f"Download Image {i+1}",
+                            data=fetch_image(image_url),
+                            file_name=f"generated_image_{i+1}.png",
+                            mime="image/png"
+                        )
 
 # Footer
 st.markdown('''
     <div class="footer">
-        <div class="footer-content">
-            <p>Powered by LUNA AI</p>
-            <p>Created by Adinarayana Thota❤️|Contact us: support@lunaai.com </p>
-        </div>
+        <p>AI Image Generator by <strong>Adinarayana Thota</strong></p>
     </div>
 ''', unsafe_allow_html=True)
