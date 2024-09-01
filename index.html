@@ -54,25 +54,21 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
         }
 
         .logo h1 {
             font-family: var(--font-secondary);
-            font-size: 1.5em;
-            margin: 0;
+            font-size: 1.8em;
         }
 
         .nav ul {
             list-style: none;
             display: flex;
             align-items: center;
-            margin: 0;
-            padding: 0;
         }
 
         .nav ul li {
-            margin-left: 15px;
+            margin-left: 20px;
         }
 
         .nav ul li a {
@@ -104,31 +100,30 @@
         .hero {
             background: linear-gradient(135deg, #6fb1fc 0%, #4364f7 100%);
             color: #fff;
-            padding: 60px 20px;
-            text-align: center;
+            padding: 100px 0;
         }
 
         .hero .container {
             display: flex;
             align-items: center;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
         .hero-content {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
         }
 
         .hero-content h2 {
             font-family: var(--font-secondary);
-            font-size: 2em;
-            margin-bottom: 15px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
         .hero-content p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
+            font-size: 1.2em;
+            margin-bottom: 30px;
         }
 
         .btn-primary {
@@ -150,7 +145,7 @@
 
         .hero-image {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
             text-align: center;
         }
 
@@ -163,27 +158,26 @@
         /* Features Section */
         .features {
             background-color: #f4f4f9;
-            padding: 60px 20px;
+            padding: 60px 0;
             text-align: center;
         }
 
         .features h2 {
             font-family: var(--font-secondary);
             font-size: 2em;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .features-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            justify-content: center;
         }
 
         .feature-item {
             flex: 1 1 220px;
             background-color: #fff;
-            padding: 20px;
+            padding: 30px 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -195,14 +189,14 @@
         }
 
         .feature-item i {
-            font-size: 2em;
+            font-size: 2.5em;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .feature-item h3 {
             font-family: var(--font-secondary);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .feature-item p {
@@ -212,14 +206,14 @@
 
         /* How It Works Section */
         .how-it-works {
-            padding: 60px 20px;
+            padding: 60px 0;
             text-align: center;
         }
 
         .how-it-works h2 {
             font-family: var(--font-secondary);
             font-size: 2em;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .steps {
@@ -230,9 +224,9 @@
         }
 
         .step {
-            flex: 1 1 220px;
+            flex: 1 1 250px;
             background-color: #fff;
-            padding: 20px;
+            padding: 30px 20px;
             border-radius: 10px;
             position: relative;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -247,23 +241,23 @@
         .step-number {
             background-color: var(--primary-color);
             color: #fff;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
+            font-size: 1.5em;
             font-weight: 700;
             position: absolute;
-            top: -20px;
-            left: calc(50% - 20px);
+            top: -25px;
+            left: calc(50% - 25px);
         }
 
         .step h3 {
             font-family: var(--font-secondary);
-            margin-top: 30px;
-            margin-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 15px;
         }
 
         .step p {
@@ -274,7 +268,7 @@
         /* AI Images Section */
         .ai-images {
             background-color: #fff;
-            padding: 60px 20px;
+            padding: 60px 0;
             text-align: center;
         }
 
@@ -286,9 +280,10 @@
 
         .ai-images .input-container {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
@@ -297,8 +292,7 @@
             font-size: 1em;
             border: 1px solid var(--dark-color);
             border-radius: 5px;
-            width: 100%;
-            max-width: 400px;
+            width: 300px;
         }
 
         .ai-images button {
@@ -329,13 +323,12 @@
         }
 
         .download-button {
-            margin-top: 20px;
+            margin-top: 15px;
+            padding: 10px 20px;
             background-color: var(--primary-color);
             color: #fff;
-            padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -344,98 +337,111 @@
             background-color: #1f6391;
         }
 
-        /* Footer Styles */
-        .footer {
-            background-color: var(--secondary-color);
-            color: var(--light-color);
+        /* Reviews Section */
+        .reviews {
+            background-color: #f4f4f9;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .reviews h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .review-item {
+            background-color: #fff;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .review-item i {
+            color: #f1c40f;
+            margin-right: 5px;
+        }
+
+        .review-item h3 {
+            margin-top: 10px;
+            font-family: var(--font-secondary);
+            font-size: 1.2em;
+        }
+
+        .review-item p {
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+
+        /* Showcase Section */
+        .showcase {
+            padding: 60px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .showcase h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .showcase-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .showcase-item {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 20px 0;
             text-align: center;
         }
 
         .footer p {
             font-size: 0.9em;
-            margin-bottom: 10px;
+            margin: 5px 0;
         }
 
         .footer a {
-            color: var(--light-color);
+            color: var(--primary-color);
             text-decoration: none;
-            font-weight: 500;
         }
 
         .footer a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .header .container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .nav ul li {
-                margin-left: 0;
-                margin-bottom: 10px;
-            }
-
-            .hero {
-                padding: 40px 10px;
-            }
-
-            .hero-content h2 {
-                font-size: 1.5em;
-            }
-
-            .hero-content p {
-                font-size: 1em;
-            }
-
-            .features-grid,
-            .steps {
-                flex-direction: column;
-            }
-
-            .feature-item,
-            .step {
-                flex: 1 1 auto;
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-content h2 {
-                font-size: 1.2em;
-            }
-
-            .hero-content p {
-                font-size: 0.9em;
-            }
-
-            .features h2,
-            .how-it-works h2,
-            .ai-images h2 {
-                font-size: 1.5em;
-            }
-
-            .feature-item,
-            .step {
-                padding: 15px;
-            }
-
-            .ai-images input[type="text"],
-            .ai-images button {
-                font-size: 0.9em;
-            }
-
-            .footer p {
-                font-size: 0.8em;
-            }
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -448,99 +454,160 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li><a href="#home">Home</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#ai-images">AI Images</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
-                <div class="cta">
-                    <a href="#get-started" class="btn">Get Started</a>
-                </div>
             </nav>
+            <div class="cta">
+                <a href="#get-started" class="btn">Get Started</a>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2>Generate Stunning Images with AI</h2>
-                <p>Experience the power of AI to create beautiful, custom images effortlessly.</p>
-                <a href="#ai-images" class="btn-primary">Try It Now</a>
+                <h2>Create Stunning AI-Generated Images Instantly</h2>
+                <p>Unleash your creativity with LUNA AI. Generate images based on your text prompts and bring your ideas to life.</p>
+                <a href="#ai-images" class="btn-primary">Try Now</a>
             </div>
             <div class="hero-image">
-                <img src="path/to/hero-image.jpg" alt="AI Image Generation">
+                <img src="hero-image.jpg" alt="AI Art Illustration">
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features" id="features">
+    <section id="features" class="features">
         <div class="container">
             <h2>Features</h2>
             <div class="features-grid">
                 <div class="feature-item">
                     <i class="fas fa-brain"></i>
                     <h3>Advanced AI</h3>
-                    <p>Utilize cutting-edge AI technology for image generation.</p>
+                    <p>Leverage the latest AI technologies to generate high-quality images from your descriptions.</p>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-paint-brush"></i>
-                    <h3>Creative Tools</h3>
-                    <p>Access a wide range of creative tools and options.</p>
+                    <h3>Customizable Outputs</h3>
+                    <p>Fine-tune the details of your generated images with simple and intuitive controls.</p>
                 </div>
                 <div class="feature-item">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>Cloud-Based</h3>
-                    <p>Generate images from anywhere with our cloud-based platform.</p>
+                    <i class="fas fa-download"></i>
+                    <h3>Easy Downloads</h3>
+                    <p>Save your creations instantly with our user-friendly download options.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works Section -->
-    <section class="how-it-works" id="how-it-works">
+    <section id="how-it-works" class="how-it-works">
         <div class="container">
             <h2>How It Works</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Input Description</h3>
-                    <p>Enter a description of the image you want to generate.</p>
+                    <h3>Enter Your Prompt</h3>
+                    <p>Describe the image you want to generate in a few words or sentences.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>AI Processing</h3>
-                    <p>Our AI processes your input and generates a custom image.</p>
+                    <h3>Generate</h3>
+                    <p>Click 'Generate' and let our AI create a stunning image based on your prompt.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Download & Enjoy</h3>
-                    <p>Download your image and use it as you like.</p>
+                    <h3>Download</h3>
+                    <p>Save the image to your device and share your creation with the world.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- AI Images Section -->
-    <section class="ai-images" id="ai-images">
+    <section id="ai-images" class="ai-images">
         <div class="container">
-            <h2>Generate Your AI Images</h2>
+            <h2>AI Images</h2>
             <div class="input-container">
-                <input type="text" placeholder="Enter description here">
-                <button>Generate Image</button>
+                <input type="text" id="prompt" placeholder="Enter your image prompt here...">
+                <button id="generate-button">Generate</button>
             </div>
             <div class="generated-image-container">
-                <img src="path/to/generated-image.jpg" alt="Generated AI Image">
-                <a href="path/to/download" class="download-button">Download Image</a>
+                <!-- Placeholder for the generated image -->
+                <img id="generated-image" src="" alt="Generated AI Image" style="display: none;">
+                <button id="download-button" class="download-button" style="display: none;">Download</button>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Showcase Section -->
+    <section class="showcase" id="showcase">
+        <div class="container">
+            <h2>Showcase</h2>
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 1">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 2">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="reviews-grid">
+                <div class="review-item">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <h3>Jane Doe</h3>
+                    <p>"LUNA AI transformed my creative process! The image quality is unmatched."</p>
+                </div>
+                <div class="review-item">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <h3>John Smith</h3>
+                    <p>"Fast, intuitive, and the results are spectacular. A game-changer for designers!"</p>
+                </div>
+                <div class="review-item">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    <h3>Emily White</h3>
+                    <p>"I love using LUNA AI for my projects. The outputs are consistently impressive."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
     <footer class="footer">
-        <p>&copy; 2024 LUNA AI. All rights reserved.</p>
-        <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
+        <div class="container">
+            <p>&copy; 2024 LUNA AI. All rights reserved.</p>
+            <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
+        </div>
     </footer>
+
+    <!-- JavaScript for Generating Images -->
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function () {
+            // Placeholder for the image generation functionality
+            const prompt = document.getElementById('prompt').value;
+            if (prompt) {
+                // Simulating image generation
+                document.getElementById('generated-image').src = 'https://via.placeholder.com/400x300.png';
+                document.getElementById('generated-image').style.display = 'block';
+                document.getElementById('download-button').style.display = 'inline-block';
+            }
+        });
+    </script>
 </body>
 </html>
