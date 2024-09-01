@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -330,6 +329,7 @@
             color: #fff;
             border: none;
             border-radius: 5px;
+            font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -338,94 +338,9 @@
             background-color: #1f6391;
         }
 
-        /* Reviews Section */
-        .reviews {
-            background-color: #f4f4f9;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .reviews h2 {
-            font-family: var(--font-secondary);
-            font-size: 2em;
-            margin-bottom: 40px;
-        }
-
-        .reviews-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .review-item {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 300px;
-            text-align: left;
-        }
-
-        .review-item i {
-            color: #f1c40f;
-            margin-right: 5px;
-        }
-
-        .review-item h3 {
-            margin-top: 10px;
-            font-family: var(--font-secondary);
-            font-size: 1.2em;
-        }
-
-        .review-item p {
-            color: #7f8c8d;
-            margin: 10px 0;
-        }
-
-        /* Showcase Section */
-        .showcase {
-            padding: 60px 0;
-            background-color: #fff;
-            text-align: center;
-        }
-
-        .showcase h2 {
-            font-family: var(--font-secondary);
-            font-size: 2em;
-            margin-bottom: 40px;
-        }
-
-        .showcase-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .showcase-item {
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 300px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .showcase-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .showcase-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        /* Footer Section */
+        /* Footer Styles */
         .footer {
-            background-color: var(--dark-color);
+            background-color: var(--secondary-color);
             color: var(--light-color);
             padding: 20px 0;
             text-align: center;
@@ -433,16 +348,26 @@
 
         .footer p {
             font-size: 0.9em;
-            margin: 5px 0;
         }
 
         .footer a {
-            color: var(--primary-color);
+            color: var(--light-color);
             text-decoration: none;
         }
 
         .footer a:hover {
             text-decoration: underline;
+        }
+
+        .footer .social-icons a {
+            margin: 0 10px;
+            color: var(--light-color);
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        .footer .social-icons a:hover {
+            color: var(--primary-color);
         }
     </style>
 </head>
@@ -455,186 +380,143 @@
             </div>
             <nav class="nav">
                 <ul>
+                    <li><a href="#home">Home</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#ai-images">AI Images</a></li>
-                    <li><a href="#showcase">Showcase</a></li>
-                    <li><a href="#reviews">Reviews</a></li>
-                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
             <div class="cta">
-                <a href="#get-started" class="btn">Get Started</a>
+                <a href="#ai-images" class="btn">Get Started</a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h2>Create Stunning AI-Generated Images Instantly</h2>
-                <p>Unleash your creativity with LUNA AI. Generate images based on your text prompts and bring your ideas to life.</p>
-                <a href="#ai-images" class="btn-primary">Try Now</a>
+                <h2>Create Stunning AI-Generated Images in Minutes</h2>
+                <p>Unleash the power of artificial intelligence to transform your creative ideas into stunning visual art.</p>
+                <a href="#ai-images" class="btn-primary">Generate Now</a>
             </div>
             <div class="hero-image">
-                <img src="hero-image.jpg" alt="AI Art Illustration">
+                <img src="https://via.placeholder.com/600x400" alt="AI Art" />
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features">
+    <section class="features" id="features">
         <div class="container">
-            <h2>Features</h2>
+            <h2>Why Choose LUNA AI?</h2>
             <div class="features-grid">
                 <div class="feature-item">
-                    <i class="fas fa-brain"></i>
-                    <h3>Advanced AI</h3>
-                    <p>Leverage the latest AI technologies to generate high-quality images from your descriptions.</p>
-                </div>
-                <div class="feature-item">
                     <i class="fas fa-paint-brush"></i>
-                    <h3>Customizable Outputs</h3>
-                    <p>Fine-tune the details of your generated images with simple and intuitive controls.</p>
+                    <h3>Innovative Algorithms</h3>
+                    <p>Harness cutting-edge AI technology to create art with unparalleled quality and detail.</p>
                 </div>
                 <div class="feature-item">
-                    <i class="fas fa-download"></i>
-                    <h3>Easy Downloads</h3>
-                    <p>Save your creations instantly with our user-friendly download options.</p>
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Easy to Use</h3>
+                    <p>Our user-friendly interface ensures a smooth and enjoyable experience for everyone.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Customizable Options</h3>
+                    <p>Fine-tune your art with a range of settings to match your unique vision and preferences.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works">
+    <section class="how-it-works" id="how-it-works">
         <div class="container">
             <h2>How It Works</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Enter Your Prompt</h3>
-                    <p>Describe the image you want to generate in a few words or sentences.</p>
+                    <h3>Submit Your Prompt</h3>
+                    <p>Provide a text description of the image you want to generate.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Generate</h3>
-                    <p>Click 'Generate' and let our AI create a stunning image based on your prompt.</p>
+                    <h3>AI Generates Image</h3>
+                    <p>Our AI processes your prompt and creates a stunning image based on your description.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Download</h3>
-                    <p>Save the image to your device and share your creation with the world.</p>
+                    <h3>Download and Share</h3>
+                    <p>Receive your image and use it for any purpose you like. Share with your friends!</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- AI Images Section -->
-    <section id="ai-images" class="ai-images">
+    <section class="ai-images" id="ai-images">
         <div class="container">
-            <h2>AI Images</h2>
+            <h2>Generate AI Images</h2>
             <div class="input-container">
-                <input type="text" id="prompt" placeholder="Enter your image prompt here...">
-                <button id="generate-button">Generate</button>
+                <input type="text" id="prompt" placeholder="Enter your prompt here...">
+                <button id="generateButton">Generate Image</button>
             </div>
-            <div class="generated-image-container">
-                <!-- Placeholder for the generated image -->
-                <img id="generated-image" src="" alt="Generated AI Image" style="display: none;">
-                <button id="download-button" class="download-button" style="display: none;">Download</button>
+            <div class="generated-image-container" id="generatedImageContainer">
+                <!-- Generated image will be displayed here -->
             </div>
         </div>
     </section>
 
-    <!-- Showcase Section -->
-    <section class="showcase" id="showcase">
-        <div class="container">
-            <h2>Showcase</h2>
-            <div class="showcase-grid">
-                <div class="showcase-item">
-                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 1">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 2">
-                </div>
-                <div class="showcase-item">
-                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 3">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="reviews">
-        <div class="container">
-            <h2>What Our Users Say</h2>
-            <div class="reviews-grid">
-                <div class="review-item">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    <h3>Jane Doe</h3>
-                    <p>"LUNA AI transformed my creative process! The image quality is unmatched."</p>
-                </div>
-                <div class="review-item">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    <h3>John Smith</h3>
-                    <p>"Fast, intuitive, and the results are spectacular. A game-changer for designers!"</p>
-                </div>
-                <div class="review-item">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                    <h3>Emily White</h3>
-                    <p>"I love using LUNA AI for my projects. The outputs are consistently impressive."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 LUNA AI. All rights reserved.</p>
-            <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
+            <p>Follow us on:
+                <span class="social-icons">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                </span>
+            </p>
         </div>
     </footer>
 
-    <!-- JavaScript for Generating Images -->
+    <!-- JavaScript -->
     <script>
-    document.getElementById('generate-button').addEventListener('click', async function () {
-        const prompt = document.getElementById('prompt').value;
-        if (prompt) {
+        document.getElementById('generateButton').addEventListener('click', async () => {
+            const prompt = document.getElementById('prompt').value;
+            const generatedImageContainer = document.getElementById('generatedImageContainer');
+
+            if (!prompt) {
+                alert('Please enter a prompt.');
+                return;
+            }
+
             try {
                 const response = await fetch('http://localhost:3000/generate-image', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ prompt: prompt })
+                    body: JSON.stringify({ prompt })
                 });
 
-                const data = await response.json();
-                if (data.imageUrl) {
-                    document.getElementById('generated-image').src = data.imageUrl;
-                    document.getElementById('generated-image').style.display = 'block';
-                    document.getElementById('download-button').style.display = 'inline-block';
+                const result = await response.json();
+
+                if (result.imageUrl) {
+                    generatedImageContainer.innerHTML = `
+                        <img src="${result.imageUrl}" alt="Generated Image">
+                        <a href="${result.imageUrl}" download class="download-button">Download Image</a>
+                    `;
                 } else {
-                    console.error('Image URL not returned');
+                    generatedImageContainer.innerHTML = '<p>Error generating image. Please try again.</p>';
                 }
             } catch (error) {
                 console.error('Error:', error);
+                generatedImageContainer.innerHTML = '<p>There was an error. Please try again later.</p>';
             }
-        }
-    });
-
-    document.getElementById('download-button').addEventListener('click', function () {
-        const imageUrl = document.getElementById('generated-image').src;
-        const link = document.createElement('a');
-        link.href = imageUrl;
-        link.download = 'generated-image.png';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
-</script>
-
+        });
+    </script>
 </body>
 </html>
