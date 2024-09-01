@@ -18,7 +18,7 @@ def imagen(prompt, count):
                     'samples': count,  # Number of images to generate
                     'steps': 40,
                     'aspect_ratio': 'square',
-                    'guidance_scale': 8.5
+                    'guidance_scale': 8.5,
                     'system_prompt': "Generate a high-quality, detailed, and visually accurate image based on the provided text prompt. The image should faithfully represent all elements described, avoiding any unrealistic, distorted, or low-quality features. Focus on creating a visually appealing and natural-looking image that closely matches the prompt."
                 }
             )
