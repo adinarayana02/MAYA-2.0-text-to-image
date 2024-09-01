@@ -3,3 +3,5 @@ requests_html
 html2text
 monsterapi
 watchdog
+flask
+python-dotenv
