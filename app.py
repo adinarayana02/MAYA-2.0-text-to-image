@@ -253,7 +253,6 @@ with st.container():
         <div class="additional-content">
             <h3>Creativity at the Speed of Your Imagination</h3>
             <p>Create beautiful variations instantly.</p>
-            <p>Generate your very own AI images from text prompts with 123RF in seconds! Watch as our advanced AI algorithms interpret your words and transform them into photorealistic visuals right before your eyes. From imaginative landscapes and abstract art to product designs and brand visuals, our AI image generator opens up a world of endless creative possibilities. No design skills are required - simply describe your desired image, and let our powerful technology do the rest. Elevate your projects with unique, attention-grabbing visuals created by you, for you, in an instant!</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -262,7 +261,7 @@ st.markdown('''
     <div class="footer">
         <div class="footer-content">
             <p>Powered by LUNA AI</p>
-            <p>Contact us: support@lunaai.com | Created by Adinarayana Thota <a href="#" style="color: #ecf0f1; text-decoration: underline;">Social Media</a></p>
+            <p>Created by Adinarayana Thota ❤️|Contact us: support@lunaai.com </p>
         </div>
     </div>
 ''', unsafe_allow_html=True)
