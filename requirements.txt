@@ -1,0 +1,5 @@
+streamlit
+requests_html
+html2text
+monsterapi
+watchdog
