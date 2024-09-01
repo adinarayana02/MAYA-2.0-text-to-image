@@ -203,15 +203,21 @@ st.markdown("""
         margin-bottom: 10px;
         line-height: 1.5;
     }
+    /* Markdown styling for overall text blocks */
+    .stMarkdown {
+        color: #2c3e50;  /* Dark slate color */
+        font-family: 'Roboto', sans-serif;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown("""
+st.markdown('''
     <div class="header">
         <div class="title">LUNA AI</div>
+        </div>
     </div>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
 
 # Main content
 st.title("AI Image Generator 🧑‍💻")
@@ -222,23 +228,40 @@ st.caption("This is an AI Image Generator. It creates an image from scratch from
 with st.container():
     st.subheader("Input Prompt")
     with st.form("prompt_form", clear_on_submit=False):
-        prompt = st.text_area("Describe the image you want to generate:", height=200)
-        submit_button = st.form_submit_button("Generate Image")
+        prompt = st.text_area("Enter your prompt here", height=100)  # Reduced height
+        submit_button = st.form_submit_button(label="Generate")
 
     if submit_button:
-        if prompt:
-            image_url = imagen(prompt)
-            if image_url:
-                st.image(fetch_image(image_url), caption='Generated Image', use_column_width=True)
-                st.download_button("Download Image", fetch_image(image_url), file_name="generated_image.png", mime="image/png")
-            else:
-                st.error("Failed to generate image. Please try again.")
+        image_url = imagen(prompt)
+        if image_url:
+            st.subheader("Generated Image")
+            st.image(image_url, use_column_width=True)
+            
+            # Add download button
+            image_bytes = fetch_image(image_url)
+            st.download_button(
+                label="Download Image",
+                data=image_bytes,
+                file_name="generated_image.png",
+                mime="image/png"
+            )
         else:
-            st.warning("Please enter a prompt.")
+            st.error("Failed to generate image.")
+
+    # Additional content below the generate button
+    st.markdown("""
+        <div class="additional-content">
+            <h3>Creativity at the Speed of Your Imagination</h3>
+            <p>Create beautiful variations instantly.</p>
+        </div>
+    """, unsafe_allow_html=True)
 
 # Footer
-st.markdown("""
+st.markdown('''
     <div class="footer">
-        <p>&copy; 2024 Adinarayana Thota. All rights reserved.</p>
+        <div class="footer-content">
+            <p>Powered by LUNA AI</p>
+            <p>Created by Adinarayana Thota ❤️|Contact us: support@lunaai.com </p>
+        </div>
     </div>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
