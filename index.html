@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -382,6 +383,46 @@
             margin: 10px 0;
         }
 
+        /* Showcase Section */
+        .showcase {
+            padding: 60px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .showcase h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .showcase-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .showcase-item {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
         /* Footer Section */
         .footer {
             background-color: var(--dark-color);
@@ -417,7 +458,8 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#ai-images">AI Images</a></li>
-		    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -504,7 +546,8 @@
             </div>
         </div>
     </section>
-<!-- Showcase Section -->
+
+    <!-- Showcase Section -->
     <section class="showcase" id="showcase">
         <div class="container">
             <h2>Showcase</h2>
@@ -521,6 +564,7 @@
             </div>
         </div>
     </section>
+
     <!-- Reviews Section -->
     <section id="reviews" class="reviews">
         <div class="container">
@@ -537,72 +581,34 @@
                     <p>"Fast, intuitive, and the results are spectacular. A game-changer for designers!"</p>
                 </div>
                 <div class="review-item">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    <h3>Emily Johnson</h3>
-                    <p>"I've tried several AI image generators, and LUNA AI is by far the best. Highly recommend it!"</p>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    <h3>Emily White</h3>
+                    <p>"I love using LUNA AI for my projects. The outputs are consistently impressive."</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>For inquiries or support, please reach out to us at <a href="mailto:support@lunaai.com">support@lunaai.com</a>.</p>
         </div>
     </section>
 
     <!-- Footer Section -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 LUNA AI. All Rights Reserved.</p>
-            <p>Designed with <i class="fas fa-heart"></i> by LUNA AI Team</p>
+            <p>&copy; 2024 LUNA AI. All rights reserved.</p>
             <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
         </div>
     </footer>
 
+    <!-- JavaScript for Generating Images -->
     <script>
-    document.getElementById('generate-button').addEventListener('click', async function() {
-        const prompt = document.getElementById('prompt').value;
-        if (prompt) {
-            try {
-                const response = await fetch('/generate', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ prompt: prompt })
-                });
-
-                if (response.ok) {
-                    const blob = await response.blob();
-                    const imageUrl = URL.createObjectURL(blob);
-
-                    // Display the generated image and download button
-                    document.getElementById('generated-image').src = imageUrl;
-                    document.getElementById('generated-image').style.display = 'block';
-                    document.getElementById('download-button').style.display = 'inline-block';
-
-                    // Set up download link
-                    document.getElementById('download-button').addEventListener('click', function() {
-                        const link = document.createElement('a');
-                        link.href = imageUrl;
-                        link.download = 'generated_image.png';
-                        link.click();
-                    });
-                } else {
-                    alert('Failed to generate image.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred.');
+        document.getElementById('generate-button').addEventListener('click', function () {
+            // Placeholder for the image generation functionality
+            const prompt = document.getElementById('prompt').value;
+            if (prompt) {
+                // Simulating image generation
+                document.getElementById('generated-image').src = 'https://via.placeholder.com/400x300.png';
+                document.getElementById('generated-image').style.display = 'block';
+                document.getElementById('download-button').style.display = 'inline-block';
             }
-        } else {
-            alert('Please enter a prompt.');
-        }
-    });
-</script>
-
+        });
+    </script>
 </body>
 </html>
