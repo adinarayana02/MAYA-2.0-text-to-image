@@ -4,36 +4,29 @@ import requests
 from monsterapi import client
 from io import BytesIO
 
-def imagen(prompt, count):
-    api_key = os.getenv('MONSTERAI_API_KEY')
-    
-    if not api_key:
-        st.error("API key is not set. Please check your environment variables.")
-        return []
-
-    # Initialize the Monster API client with the API key
-    monster_client = client(api_key=api_key)
+def imagen(prompt):
+    os.environ['MONSTER_API_KEY'] = os.getenv('MONSTERAI_API_KEY')
+    monster_client = client()
 
     try:
-        with st.spinner('Generating images...'):
+        with st.spinner('Generating image...'):
             response = monster_client.get_response(
                 model='sdxl-base',
                 data={
                     'prompt': prompt,
                     'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly',
-                    'samples': count,  # Number of images to generate
+                    'samples': 1,
                     'steps': 40,
                     'aspect_ratio': 'square',
-                    'guidance_scale': 8.5,
-                    'system_prompt': "Generate a high-quality, detailed, and visually accurate image based on the provided text prompt. The image should faithfully represent all elements described, avoiding any unrealistic, distorted, or low-quality features. Focus on creating a visually appealing and natural-looking image that closely matches the prompt."
+                    'guidance_scale': 8.5
                 }
             )
             imageList = monster_client.wait_and_get_result(response['process_id'], timeout=200)
-            st.success(f"Successfully generated {count} image(s)!")
-            return imageList['output']  # Return the list of image URLs
+            st.success("Image generated successfully!")
+            return imageList['output'][0]  # Returning the first image URL
     except Exception as e:
         st.error(f"An error occurred: {e}")
-        return []
+        return None
 
 def fetch_image(image_url):
     """Fetch the image from the URL and return as a BytesIO object."""
@@ -198,16 +191,17 @@ st.markdown("""
         margin-top: 30px;
     }
     .additional-content h3 {
-        color: #2c3e50;  /* Dark slate color */
-        font-size: 1.5em;  /* Larger font size */
-        font-weight: 600;  /* Semi-bold text */
+        color: #2c3e50;  /* Dark slate for heading */
+        font-size: 1.8em;
+        font-family: 'Montserrat', sans-serif;
         margin-bottom: 15px;
-        font-family: 'Montserrat', sans-serif;  /* Elegant and bold font */
     }
     .additional-content p {
-        color: #7f8c8d;  /* Medium grey text */
-        font-size: 1em;  /* Balanced font size */
-        font-family: 'Roboto', sans-serif;  /* Consistent font */
+        color: #7f8c8d;  /* Medium grey for paragraphs */
+        font-size: 1em;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 10px;
+        line-height: 1.5;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -215,36 +209,36 @@ st.markdown("""
 # Header
 st.markdown("""
     <div class="header">
-        <div class="title">AI Image Generator</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </div>
+        <div class="title">LUNA AI</div>
     </div>
 """, unsafe_allow_html=True)
 
-# Main app content
-st.title("AI Image Generator")
-st.write("Welcome to the AI Image Generator! Provide a prompt to generate images using the Monster API.")
+# Main content
+st.title("AI Image Generator 🧑‍💻")
+st.caption("© Adinarayana Thota")
+st.caption("This is an AI Image Generator. It creates an image from scratch from a text description.")
 
-# Input for image generation
-prompt = st.text_area("Enter prompt:", "A beautiful sunrise over the mountains")
-count = st.slider("Number of images to generate:", 1, 5, 1)
+# Create a container for the layout
+with st.container():
+    st.subheader("Input Prompt")
+    with st.form("prompt_form", clear_on_submit=False):
+        prompt = st.text_area("Describe the image you want to generate:", height=200)
+        submit_button = st.form_submit_button("Generate Image")
 
-if st.button("Generate Images"):
-    images = imagen(prompt, count)
-    
-    if images:
-        st.success(f"Successfully generated {len(images)} image(s)!")
-        for i, img_url in enumerate(images):
-            st.image(fetch_image(img_url), caption=f"Generated Image {i+1}", use_column_width=True)
-    else:
-        st.error("Failed to generate images.")
+    if submit_button:
+        if prompt:
+            image_url = imagen(prompt)
+            if image_url:
+                st.image(fetch_image(image_url), caption='Generated Image', use_column_width=True)
+                st.download_button("Download Image", fetch_image(image_url), file_name="generated_image.png", mime="image/png")
+            else:
+                st.error("Failed to generate image. Please try again.")
+        else:
+            st.warning("Please enter a prompt.")
 
 # Footer
 st.markdown("""
     <div class="footer">
-        <p>&copy; 2024 AI Image Generator. All rights reserved.</p>
+        <p>&copy; 2024 Adinarayana Thota. All rights reserved.</p>
     </div>
 """, unsafe_allow_html=True)
