@@ -42,6 +42,7 @@ body {
 }
 
 /* Header Styles */
+/* Sticky Header Styles */
 .header {
     background-color: var(--secondary-color);
     color: var(--light-color);
@@ -49,8 +50,15 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.3s ease, padding 0.3s ease;
 }
 
+/* Optional: Add shadow or change header styles on scroll */
+.header.scrolled {
+    background-color: var(--dark-color);
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
 .header .container {
     display: flex;
     align-items: center;
@@ -641,6 +649,14 @@ body {
 
     <!-- JavaScript for Generating Images -->
     <script>
+        document.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 50) { // Adjust this value as needed
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
         document.getElementById('generate-button').addEventListener('click', function () {
             // Placeholder for the image generation functionality
             const prompt = document.getElementById('prompt').value;
