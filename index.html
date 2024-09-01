@@ -563,23 +563,46 @@
     </footer>
 
     <script>
-        document.getElementById('generate-button').addEventListener('click', function() {
-            // Placeholder function for generating an image
-            const prompt = document.getElementById('prompt').value;
-            alert('Generate button clicked with prompt: ' + prompt);
+    document.getElementById('generate-button').addEventListener('click', async function() {
+        const prompt = document.getElementById('prompt').value;
+        if (prompt) {
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: prompt })
+                });
 
-            // Display the generated image and download button (simulated here)
-            document.getElementById('generated-image').src = 'placeholder-image.jpg'; // Replace with the actual generated image source
-            document.getElementById('generated-image').style.display = 'block';
-            document.getElementById('download-button').style.display = 'inline-block';
-        });
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const imageUrl = URL.createObjectURL(blob);
 
-        document.getElementById('download-button').addEventListener('click', function() {
-            const link = document.createElement('a');
-            link.href = document.getElementById('generated-image').src; // Replace with actual image source
-            link.download = 'generated-image.jpg';
-            link.click();
-        });
-    </script>
+                    // Display the generated image and download button
+                    document.getElementById('generated-image').src = imageUrl;
+                    document.getElementById('generated-image').style.display = 'block';
+                    document.getElementById('download-button').style.display = 'inline-block';
+
+                    // Set up download link
+                    document.getElementById('download-button').addEventListener('click', function() {
+                        const link = document.createElement('a');
+                        link.href = imageUrl;
+                        link.download = 'generated_image.png';
+                        link.click();
+                    });
+                } else {
+                    alert('Failed to generate image.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred.');
+            }
+        } else {
+            alert('Please enter a prompt.');
+        }
+    });
+</script>
+
 </body>
 </html>
