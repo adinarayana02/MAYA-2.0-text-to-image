@@ -5,8 +5,14 @@ from monsterapi import client
 from io import BytesIO
 
 def imagen(prompt, count):
-    os.environ['MONSTER_API_KEY'] = os.getenv('MONSTERAI_API_KEY')
-    monster_client = client()
+    api_key = os.getenv('MONSTERAI_API_KEY')
+    
+    if not api_key:
+        st.error("API key is not set. Please check your environment variables.")
+        return []
+
+    # Initialize the Monster API client with the API key
+    monster_client = client(api_key=api_key)
 
     try:
         with st.spinner('Generating images...'):
@@ -192,65 +198,53 @@ st.markdown("""
         margin-top: 30px;
     }
     .additional-content h3 {
-        color: #2c3e50;  /* Dark slate for heading */
-        font-size: 1.8em;
-        font-family: 'Montserrat', sans-serif;
+        color: #2c3e50;  /* Dark slate color */
+        font-size: 1.5em;  /* Larger font size */
+        font-weight: 600;  /* Semi-bold text */
         margin-bottom: 15px;
+        font-family: 'Montserrat', sans-serif;  /* Elegant and bold font */
     }
     .additional-content p {
-        color: #7f8c8d;  /* Medium grey for paragraphs */
-        font-size: 1em;
-        font-family: 'Roboto', sans-serif;
-        margin-bottom: 10px;
-        line-height: 1.5;
-    }
-    /* Markdown styling for overall text blocks */
-    .stMarkdown {
-        color: #2c3e50;  /* Dark slate color */
-        font-family: 'Roboto', sans-serif;
+        color: #7f8c8d;  /* Medium grey text */
+        font-size: 1em;  /* Balanced font size */
+        font-family: 'Roboto', sans-serif;  /* Consistent font */
     }
     </style>
 """, unsafe_allow_html=True)
 
 # Header
-st.markdown('''
+st.markdown("""
     <div class="header">
-        <div class="title">LUNA AI</div>
+        <div class="title">AI Image Generator</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
     </div>
-''', unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
-# Main content
-st.title("AI Image Generator 🧑‍💻")
-st.caption("© Adinarayana Thota")
-st.caption("This is an AI Image Generator. It creates an image from scratch from a text description.")
+# Main app content
+st.title("AI Image Generator")
+st.write("Welcome to the AI Image Generator! Provide a prompt to generate images using the Monster API.")
 
-# Create a container for the layout
-with st.container():
-    st.subheader("Input Prompt")
-    with st.form("prompt_form", clear_on_submit=False):
-        prompt = st.text_area("Enter your prompt here", height=100)
-        count = st.slider("Select the number of images to generate", min_value=1, max_value=10, value=1)  # Add a slider for image count
-        submit = st.form_submit_button("Generate Image")
+# Input for image generation
+prompt = st.text_area("Enter prompt:", "A beautiful sunrise over the mountains")
+count = st.slider("Number of images to generate:", 1, 5, 1)
 
-        if submit:
-            if not prompt:
-                st.warning("Please enter a prompt before submitting.")
-            else:
-                imageList = imagen(prompt, count)  # Use the updated image generation function
-                if imageList:
-                    st.success(f"Generated {len(imageList)} image(s) successfully!")
-                    for i, image_url in enumerate(imageList):
-                        st.image(image_url, caption=f"Generated Image {i+1}", use_column_width=True)
-                        st.download_button(
-                            label=f"Download Image {i+1}",
-                            data=fetch_image(image_url),
-                            file_name=f"generated_image_{i+1}.png",
-                            mime="image/png"
-                        )
+if st.button("Generate Images"):
+    images = imagen(prompt, count)
+    
+    if images:
+        st.success(f"Successfully generated {len(images)} image(s)!")
+        for i, img_url in enumerate(images):
+            st.image(fetch_image(img_url), caption=f"Generated Image {i+1}", use_column_width=True)
+    else:
+        st.error("Failed to generate images.")
 
 # Footer
-st.markdown('''
+st.markdown("""
     <div class="footer">
-        <p>AI Image Generator by <strong>Adinarayana Thota</strong></p>
+        <p>&copy; 2024 AI Image Generator. All rights reserved.</p>
     </div>
-''', unsafe_allow_html=True)
+""", unsafe_allow_html=True)
