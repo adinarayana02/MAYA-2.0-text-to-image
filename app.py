@@ -1,15 +1,11 @@
-import streamlit as st
+from flask import Flask, request, jsonify, send_file
 import os
 import requests
 from monsterapi import client
 from io import BytesIO
-import streamlit.components.v1 as components
-from flask import Flask, request, jsonify
 
-# Set up Flask server within Streamlit
 app = Flask(__name__)
 
-# Function to generate images using Monster API
 def imagen(prompt):
     os.environ['MONSTER_API_KEY'] = os.getenv('MONSTERAI_API_KEY')
     monster_client = client()
@@ -26,33 +22,32 @@ def imagen(prompt):
                 'guidance_scale': 8.5
             }
         )
-        image_list = monster_client.wait_and_get_result(response['process_id'], timeout=200)
-        return image_list['output'][0]  # Return the first image URL
+        imageList = monster_client.wait_and_get_result(response['process_id'], timeout=200)
+        image_url = imageList['output'][0]  # Returning the first image URL
+        return image_url
     except Exception as e:
         return str(e)
 
-# Flask route to handle AI image generation
+def fetch_image(image_url):
+    """Fetch the image from the URL and return as a BytesIO object."""
+    response = requests.get(image_url)
+    return BytesIO(response.content)
+
 @app.route('/generate', methods=['POST'])
 def generate():
     data = request.json
-    prompt = data.get('prompt', '')
+    prompt = data.get('prompt')
     image_url = imagen(prompt)
-    if image_url:
-        return jsonify({'image_url': image_url})
+    if 'http' in image_url:  # simple check to see if the URL seems valid
+        image_bytes = fetch_image(image_url)
+        return send_file(
+            image_bytes,
+            mimetype='image/png',
+            as_attachment=True,
+            attachment_filename='generated_image.png'
+        )
     else:
-        return jsonify({'error': 'Failed to generate image'}), 500
+        return jsonify({'error': image_url}), 500
 
-# Render the index.html using Streamlit
-def render_html():
-    with open("index.html", 'r') as file:
-        html_content = file.read()
-    # Use Streamlit's HTML component to render the content
-    components.html(html_content, height=800, scrolling=True)
-
-# Main Streamlit application logic
-if __name__ == "__main__":
-    # Render the HTML interface
-    render_html()
-    
-    # Start the Flask app
-    app.run(port=8501)
+if __name__ == '__main__':
+    app.run(debug=True)
