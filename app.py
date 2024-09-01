@@ -261,7 +261,7 @@ st.markdown('''
     <div class="footer">
         <div class="footer-content">
             <p>Powered by LUNA AI</p>
-            <p>Created by Adinarayana Thota ❤️|Contact us: support@lunaai.com </p>
+            <p>Created by Adinarayana Thota❤️|Contact us: support@lunaai.com </p>
         </div>
     </div>
 ''', unsafe_allow_html=True)
