@@ -599,16 +599,42 @@
 
     <!-- JavaScript for Generating Images -->
     <script>
-        document.getElementById('generate-button').addEventListener('click', function () {
-            // Placeholder for the image generation functionality
-            const prompt = document.getElementById('prompt').value;
-            if (prompt) {
-                // Simulating image generation
-                document.getElementById('generated-image').src = 'https://via.placeholder.com/400x300.png';
-                document.getElementById('generated-image').style.display = 'block';
-                document.getElementById('download-button').style.display = 'inline-block';
+    document.getElementById('generate-button').addEventListener('click', async function () {
+        const prompt = document.getElementById('prompt').value;
+        if (prompt) {
+            try {
+                const response = await fetch('http://localhost:3000/generate-image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const data = await response.json();
+                if (data.imageUrl) {
+                    document.getElementById('generated-image').src = data.imageUrl;
+                    document.getElementById('generated-image').style.display = 'block';
+                    document.getElementById('download-button').style.display = 'inline-block';
+                } else {
+                    console.error('Image URL not returned');
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        });
-    </script>
+        }
+    });
+
+    document.getElementById('download-button').addEventListener('click', function () {
+        const imageUrl = document.getElementById('generated-image').src;
+        const link = document.createElement('a');
+        link.href = imageUrl;
+        link.download = 'generated-image.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+</script>
+
 </body>
 </html>
