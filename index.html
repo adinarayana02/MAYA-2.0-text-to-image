@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator | LUNA AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Variables for colors and fonts */
+        :root {
+            --primary-color: #2980b9;
+            --secondary-color: #34495e;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --font-primary: 'Roboto', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: var(--font-primary);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo h1 {
+            font-family: var(--font-secondary);
+            font-size: 1.8em;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav ul li {
+            margin-left: 20px;
+        }
+
+        .nav ul li a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta .btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta .btn:hover {
+            background-color: #1f6391;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #6fb1fc 0%, #4364f7 100%);
+            color: #fff;
+            padding: 100px 0;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-content h2 {
+            font-family: var(--font-secondary);
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: #f4f4f9;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feature-item {
+            flex: 1 1 220px;
+            background-color: #fff;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        }
+
+        .feature-item i {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            font-family: var(--font-secondary);
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .how-it-works h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1 1 250px;
+            background-color: #fff;
+            padding: 30px 20px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            position: absolute;
+            top: -25px;
+            left: calc(50% - 25px);
+        }
+
+        .step h3 {
+            font-family: var(--font-secondary);
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+
+        /* AI Images Section */
+        .ai-images {
+            background-color: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .ai-images h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .ai-images .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .ai-images input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid var(--dark-color);
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        .ai-images button {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .ai-images button:hover {
+            background-color: #1f6391;
+        }
+
+        .generated-image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .generated-image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .download-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-button:hover {
+            background-color: #1f6391;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background-color: #f4f4f9;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .reviews h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .review-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .review-item i {
+            color: #f1c40f;
+            margin-right: 5px;
+        }
+
+        .review-item h3 {
+            margin-top: 10px;
+            font-family: var(--font-secondary);
+            font-size: 1.2em;
+        }
+
+        .review-item p {
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+
+        /* Showcase Section */
+        .showcase {
+            padding: 60px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .showcase h2 {
+            font-family: var(--font-secondary);
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .showcase-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .showcase-item {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>LUNA AI</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#ai-images">AI Images</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="cta">
+                <a href="#get-started" class="btn">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Create Stunning AI-Generated Images Instantly</h2>
+                <p>Unleash your creativity with LUNA AI. Generate images based on your text prompts and bring your ideas to life.</p>
+                <a href="#ai-images" class="btn-primary">Try Now</a>
+            </div>
+            <div class="hero-image">
+                <img src="hero-image.jpg" alt="AI Art Illustration">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-brain"></i>
+                    <h3>Advanced AI</h3>
+                    <p>Leverage the latest AI technologies to generate high-quality images from your descriptions.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Customizable Outputs</h3>
+                    <p>Fine-tune the details of your generated images with simple and intuitive controls.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-download"></i>
+                    <h3>Easy Downloads</h3>
+                    <p>Save your creations instantly with our user-friendly download options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Enter Your Prompt</h3>
+                    <p>Describe the image you want to generate in a few words or sentences.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Generate</h3>
+                    <p>Click 'Generate' and let our AI create a stunning image based on your prompt.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Download</h3>
+                    <p>Save the image to your device and share your creation with the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Images Section -->
+    <section id="ai-images" class="ai-images">
+        <div class="container">
+            <h2>AI Images</h2>
+            <div class="input-container">
+                <input type="text" id="prompt" placeholder="Enter your image prompt here...">
+                <button id="generate-button">Generate</button>
+            </div>
+            <div class="generated-image-container">
+                <!-- Placeholder for the generated image -->
+                <img id="generated-image" src="" alt="Generated AI Image" style="display: none;">
+                <button id="download-button" class="download-button" style="display: none;">Download</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="showcase">
+        <div class="container">
+            <h2>Showcase</h2>
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 1">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 2">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://via.placeholder.com/300x200.png" alt="Sample Image 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="reviews-grid">
+                <div class="review-item">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <h3>Jane Doe</h3>
+                    <p>"LUNA AI transformed my creative process! The image quality is unmatched."</p>
+                </div>
+                <div class="review-item">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <h3>John Smith</h3>
+                    <p>"Fast, intuitive, and the results are spectacular. A game-changer for designers!"</p>
+                </div>
+                <div class="review-item">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    <h3>Emily White</h3>
+                    <p>"I love using LUNA AI for my projects. The outputs are consistently impressive."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 LUNA AI. All rights reserved.</p>
+            <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Generating Images -->
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function () {
+            // Placeholder for the image generation functionality
+            const prompt = document.getElementById('prompt').value;
+            if (prompt) {
+                // Simulating image generation
+                document.getElementById('generated-image').src = 'https://via.placeholder.com/400x300.png';
+                document.getElementById('generated-image').style.display = 'block';
+                document.getElementById('download-button').style.display = 'inline-block';
+            }
+        });
+    </script>
+</body>
+</html>
