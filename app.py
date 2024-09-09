@@ -4,26 +4,28 @@ import requests
 from monsterapi import client
 from io import BytesIO
 
-def imagen(prompt):
+def imagen(prompt, samples):
     os.environ['MONSTER_API_KEY'] = os.getenv('MONSTERAI_API_KEY')
     monster_client = client()
+
+    
 
     try:
         with st.spinner('Generating image...'):
             response = monster_client.get_response(
                 model='sdxl-base',
                 data={
-                    'prompt': prompt,
-                    'negprompt': 'unreal, fake, meme, joke, disfigured, poor quality, bad, ugly',
-                    'samples': 1,
-                    'steps': 40,
+                    'prompt':prompt,
+                    'negprompt': 'unreal, fake, meme, joke, poor quality, bad, ugly',
+                    'samples': samples,
+                    'steps': 100,
                     'aspect_ratio': 'square',
-                    'guidance_scale': 8.5
+                    'guidance_scale': 10
                 }
             )
             imageList = monster_client.wait_and_get_result(response['process_id'], timeout=200)
-            st.success("Image generated successfully!")
-            return imageList['output'][0]  # Returning the first image URL
+            st.success("Images generated successfully!")
+            return imageList['output']  # Returning the list of image URLs
     except Exception as e:
         st.error(f"An error occurred: {e}")
         return None
@@ -45,21 +47,21 @@ st.markdown("""
     <style>
     /* General background and text colors */
     .main {
-        background-color: #f4f4f9;  /* Very light grey background for a clean look */
-        color: #2c3e50;  /* Dark slate color for text */
-        font-family: 'Roboto', sans-serif;  /* Modern and clean font */
+        background-color: #f4f4f9;
+        color: #2c3e50;
+        font-family: 'Roboto', sans-serif;
     }
     /* Header styling */
     .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #34495e;  /* Dark blue-grey background for header */
+        background-color: #34495e;
         padding: 15px 20px;
-        color: #ecf0f1;  /* Light grey text color */
-        border-bottom: 2px solid #2c3e50;  /* Slightly darker border for header */
+        color: #ecf0f1;
+        border-bottom: 2px solid #2c3e50;
         flex-wrap: wrap;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Light shadow for a more defined look */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .header .title {
         font-size: 1.8em;
@@ -74,12 +76,11 @@ st.markdown("""
         color: #ecf0f1;
         text-decoration: none;
         margin: 0 15px;
-        transition: color 0.3s ease; /* Smooth transition for link hover effect */
+        transition: color 0.3s ease;
     }
     .header .nav-links a:hover {
-        color: #bdc3c7;  /* Slightly lighter color on hover */
+        color: #bdc3c7;
     }
-    /* Responsive styling for navigation links */
     @media (max-width: 768px) {
         .header {
             flex-direction: column;
@@ -97,16 +98,15 @@ st.markdown("""
     }
     /* Footer styling */
     .footer {
-        background-color: #34495e;  /* Dark blue-grey background for footer */
-        color: #ecf0f1;  /* Light grey text color */
+        background-color: #34495e;
+        color: #ecf0f1;
         padding: 20px;
         text-align: center;
         font-size: 1em;
-        border-top: 2px solid #2c3e50;  /* Slightly darker border for footer */
+        border-top: 2px solid #2c3e50;
         margin-top: 30px;
-        box-shadow: 0 -4px 8px rgba(0,0,0,0.1); /* Light shadow for footer */
+        box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
     }
-    /* Responsive footer content */
     @media (max-width: 768px) {
         .footer {
             font-size: 0.9em;
@@ -114,76 +114,76 @@ st.markdown("""
     }
     /* Title */
     .css-h5rgaw {
-        color: #2c3e50;  /* Dark slate for title */
+        color: #2c3e50;
         text-align: center;
-        font-size: 2.2em;  /* Adjusted for responsiveness */
-        font-weight: 700;  /* Bolder font weight for emphasis */
-        font-family: 'Montserrat', sans-serif;  /* Elegant and bold font */
+        font-size: 2.2em;
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
         margin-bottom: 20px;
     }
     /* Caption */
     .css-18e3th9 {
-        color: #7f8c8d;  /* Medium grey for the caption */
+        color: #7f8c8d;
         text-align: center;
-        font-size: 1em;  /* Balanced font size */
+        font-size: 1em;
         margin-bottom: 30px;
-        font-family: 'Roboto', sans-serif;  /* Consistent font */
+        font-family: 'Roboto', sans-serif;
     }
     /* Subheader (Input Prompt) */
     .css-1kyxreq {
-        color: #2c3e50;  /* Dark slate for input prompt label */
-        font-size: 1.2em;  /* Slightly larger font size */
+        color: #2c3e50;
+        font-size: 1.2em;
         font-weight: 500;
         font-family: 'Roboto', sans-serif;
     }
     /* Text area styling */
     .stTextArea textarea {
-        background-color: #ffffff;  /* White background for the text area */
-        color: #2c3e50;  /* Dark slate text color */
-        border: 1px solid #bdc3c7;  /* Light grey border */
-        padding: 10px;  /* Consistent padding */
-        border-radius: 8px;  /* Rounded corners for a modern look */
+        background-color: #ffffff;
+        color: #2c3e50;
+        border: 1px solid #bdc3c7;
+        padding: 10px;
+        border-radius: 8px;
         font-family: 'Roboto', sans-serif;
-        width: 100%;  /* Full width for better mobile usability */
-        transition: border-color 0.3s ease; /* Smooth transition on focus */
+        width: 100%;
+        transition: border-color 0.3s ease;
     }
     .stTextArea textarea:focus {
-        border-color: #2980b9;  /* Blue border on focus */
-        outline: none;  /* Remove outline */
+        border-color: #2980b9;
+        outline: none;
     }
     /* Button styling */
     .stButton button {
-        background-color: #2980b9;  /* Bright blue color for the button */
-        color: #ffffff;  /* White text */
+        background-color: #2980b9;
+        color: #ffffff;
         border: none;
-        padding: 12px 24px;  /* Larger padding for emphasis */
-        font-size: 1em;  /* Adjusted font size */
-        border-radius: 8px;  /* Rounded corners */
+        padding: 12px 24px;
+        font-size: 1em;
+        border-radius: 8px;
         font-family: 'Roboto', sans-serif;
-        font-weight: 600;  /* Semi-bold text for the button */
-        transition: background-color 0.3s ease;  /* Smooth transition on hover */
+        font-weight: 600;
+        transition: background-color 0.3s ease;
     }
     .stButton button:hover {
-        background-color: #21618c;  /* Slightly darker blue on hover */
+        background-color: #21618c;
     }
     /* Spinner color */
     .stSpinner {
-        color: #2980b9;  /* Bright blue spinner */
+        color: #2980b9;
     }
     /* Download button styling */
     .stDownloadButton button {
-        background-color: #2980b9;  /* Same blue as the submit button */
-        color: #ffffff;  /* White text */
+        background-color: #2980b9;
+        color: #ffffff;
         border: none;
         padding: 12px 24px;
-        font-size: 1em;  /* Adjusted font size */
+        font-size: 1em;
         border-radius: 8px;
         font-family: 'Roboto', sans-serif;
         font-weight: 600;
         transition: background-color 0.3s ease;
     }
     .stDownloadButton button:hover {
-        background-color: #21618c;  /* Slightly darker blue on hover */
+        background-color: #21618c;
     }
     /* Styling for additional content */
     .additional-content {
@@ -191,13 +191,13 @@ st.markdown("""
         margin-top: 30px;
     }
     .additional-content h3 {
-        color: #2c3e50;  /* Dark slate for heading */
+        color: #2c3e50;
         font-size: 1.8em;
         font-family: 'Montserrat', sans-serif;
         margin-bottom: 15px;
     }
     .additional-content p {
-        color: #7f8c8d;  /* Medium grey for paragraphs */
+        color: #7f8c8d;
         font-size: 1em;
         font-family: 'Roboto', sans-serif;
         margin-bottom: 10px;
@@ -205,7 +205,7 @@ st.markdown("""
     }
     /* Markdown styling for overall text blocks */
     .stMarkdown {
-        color: #2c3e50;  /* Dark slate color */
+        color: #2c3e50;
         font-family: 'Roboto', sans-serif;
     }
     </style>
@@ -214,7 +214,7 @@ st.markdown("""
 # Header
 st.markdown('''
     <div class="header">
-        <div class="title">LUNA AI</div>
+        <div class="title">MAYA 2.0 AI</div>
         </div>
     </div>
 ''', unsafe_allow_html=True)
@@ -228,25 +228,27 @@ st.caption("This is an AI Image Generator. It creates an image from scratch from
 with st.container():
     st.subheader("Input Prompt")
     with st.form("prompt_form", clear_on_submit=False):
-        prompt = st.text_area("Enter your prompt here", height=100)  # Reduced height
+        prompt = st.text_area("Enter your prompt here", height=100)
+        samples = st.slider("Number of Samples", min_value=1, max_value=4, value=2)
         submit_button = st.form_submit_button(label="Generate")
 
     if submit_button:
-        image_url = imagen(prompt)
-        if image_url:
-            st.subheader("Generated Image")
-            st.image(image_url, use_column_width=True)
-            
-            # Add download button
-            image_bytes = fetch_image(image_url)
-            st.download_button(
-                label="Download Image",
-                data=image_bytes,
-                file_name="generated_image.png",
-                mime="image/png"
-            )
+        image_urls = imagen(prompt, samples)
+        if image_urls:
+            st.subheader("Generated Images")
+            cols = st.columns(samples)
+            for i, image_url in enumerate(image_urls):
+                with cols[i]:
+                    st.image(image_url, use_column_width=True)
+                    image_bytes = fetch_image(image_url)
+                    st.download_button(
+                        label="Download Image",
+                        data=image_bytes,
+                        file_name=f"generated_image_{i+1}.png",
+                        mime="image/png"
+                    )
         else:
-            st.error("Failed to generate image.")
+            st.error("Failed to generate images.")
 
     # Additional content below the generate button
     st.markdown("""
@@ -260,7 +262,7 @@ with st.container():
 st.markdown('''
     <div class="footer">
         <div class="footer-content">
-            <p>Powered by LUNA AI</p>
+            <p>Powered by MAYA 2.O AI</p>
             <p>Created by Adinarayana Thota ❤️|Contact us: support@lunaai.com </p>
         </div>
     </div>
