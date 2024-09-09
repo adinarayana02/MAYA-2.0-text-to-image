@@ -34,6 +34,6 @@
    cd MAYA-2.0
 
 #### Live Demo
-Experience MAYA 2.0 in action! Check out our[![Live Demo](https://img.shields.io/badge/Live Demo-yellow.svg)](https://huggingface.co/spaces/Narayana02/text2img) to see real-time text-to-image generation.
+Experience MAYA 2.0 in action! Check out our[![Live Demo]](https://huggingface.co/spaces/Narayana02/text2img) to see real-time text-to-image generation.
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
