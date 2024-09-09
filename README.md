@@ -33,22 +33,7 @@
    git clone https://github.com/adinarayana02/text-to-image.git 
    cd MAYA-2.0
 
-
-
-
-
-
-
----
-title: Text2img
-emoji: 🌍
-colorFrom: pink
-colorTo: green
-sdk: streamlit
-sdk_version: 1.38.0
-app_file: app.py
-pinned: false
-license: mit
----
+#### Live Demo
+Experience MAYA 2.0 in action! Check out our[![live demo] (https://huggingface.co/spaces/Narayana02/text2img)] to see real-time text-to-image generation.
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
